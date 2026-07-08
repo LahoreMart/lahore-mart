@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lahore Mart - Pakistan's #1 Online Shopping</title>
+    <title>Lahore Mart - Up To 50% OFF on Selected Products</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style> 
         body { font-family: 'Roboto', sans-serif; } 
-        .product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
-        .active-cat { color: #F85606; font-weight: bold; border-bottom: 2px solid #F85606; }
+        .product-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.12); }
+        .discount-badge { position: absolute; top: 8px; left: 8px; background: #F85606; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 12px; }
+        .active-cat { color: #F85606; font-weight: bold; border-bottom: 3px solid #F85606; }
     </style>
 </head>
 <body class="bg-[#F5F5F5]">
@@ -17,52 +18,64 @@
     <!-- 1. TOP BAR -->
     <div class="bg-[#F85606] text-white text-xs">
         <div class="container mx-auto px-4 py-1 flex justify-between">
-            <div>Save More on App | Become a Seller</div>
-            <div>Help | Sign Up | Login</div>
+            <div>Free Delivery on Orders Above Rs. 2000 | Become a Seller</div>
+            <div>Help | Track Order | Login</div>
         </div>
     </div>
 
     <!-- 2. MAIN HEADER -->
-    <header class="bg-[#F85606] sticky top-0 z-50 shadow-md">
+    <header class="bg-[#F85606] sticky top-0 z-50 shadow-lg">
         <div class="container mx-auto px-4 py-3 flex items-center gap-4">
-            <h1 class="text-2xl font-bold text-white">Lahore<span class="text-yellow-300">Mart</span></h1>
-            <input id="search" onkeyup="searchProducts()" type="text" placeholder="Search in LahoreMart" class="w-full bg-white rounded-md px-4 py-2">
+            <h1 class="text-2xl font-black text-white">Lahore<span class="text-yellow-300">Mart</span></h1>
+            <input id="search" onkeyup="searchProducts()" type="text" placeholder="Search for Products, Brands and Categories" class="w-full bg-white rounded-md px-4 py-2">
             <button onclick="toggleCart()" class="relative bg-white text-[#F85606] px-4 py-2 rounded-md font-bold">
-                🛒 <span id="cart-count" class="bg-red-600 text-white text-xs rounded-full px-2 py-0.5 ml-1">0</span>
+                🛒 Cart <span id="cart-count" class="bg-red-600 text-white text-xs rounded-full px-2 py-0.5 ml-1">0</span>
             </button>
         </div>
     </header>
 
-    <!-- 3. CATEGORIES BAR - AB YE CLICKABLE HAI -->
+    <!-- 3. CATEGORIES BAR -->
     <div class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 py-2 flex gap-6 text-sm font-medium overflow-x-auto">
-            <a href="#" onclick="filterCategory('all')" id="cat-all" class="flex items-center gap-1 active-cat">⭐ All</a>
-            <a href="#" onclick="filterCategory('mobiles')" id="cat-mobiles" class="flex items-center gap-1 hover:text-[#F85606]">📱 Mobiles</a>
-            <a href="#" onclick="filterCategory('fashion')" id="cat-fashion" class="flex items-center gap-1 hover:text-[#F85606]">👗 Fashion</a>
-            <a href="#" onclick="filterCategory('electronics')" id="cat-electronics" class="flex items-center gap-1 hover:text-[#F85606]">💻 Electronics</a>
-            <a href="#" onclick="filterCategory('home')" id="cat-home" class="flex items-center gap-1 hover:text-[#F85606]">🏠 Home</a>
-            <a href="#" onclick="filterCategory('beauty')" id="cat-beauty" class="flex items-center gap-1 hover:text-[#F85606]">💄 Beauty</a>
-            <a href="#" onclick="filterCategory('sports')" id="cat-sports" class="flex items-center gap-1 hover:text-[#F85606]">🏋️ Sports</a>
+        <div class="container mx-auto px-4 py-3 flex gap-6 text-sm font-semibold overflow-x-auto">
+            <a href="#" onclick="filterCategory('all')" id="cat-all" class="active-cat pb-1">All Deals</a>
+            <a href="#" onclick="filterCategory('mobiles')" id="cat-mobiles" class="hover:text-[#F85606] pb-1">📱 Mobiles</a>
+            <a href="#" onclick="filterCategory('fashion')" id="cat-fashion" class="hover:text-[#F85606] pb-1">👗 Fashion</a>
+            <a href="#" onclick="filterCategory('electronics')" id="cat-electronics" class="hover:text-[#F85606] pb-1">💻 Electronics</a>
+            <a href="#" onclick="filterCategory('home')" id="cat-home" class="hover:text-[#F85606] pb-1">🏠 Home</a>
+            <a href="#" onclick="filterCategory('beauty')" id="cat-beauty" class="hover:text-[#F85606] pb-1">💄 Beauty</a>
         </div>
     </div>
 
-    <!-- 4. BANNER -->
-    <div class="container mx-auto px-4 mt-4">
-        <img src="https://via.placeholder.com/1200x300/F85606/FFFFFF?text=Lahore+Mart+Mega+Sale" class="rounded-lg w-full">
+    <!-- <!-- POSTER STYLE BANNER - HD -->
+<div class="container mx-auto px-4 mt-4">
+    <div class="relative rounded-lg shadow-2xl overflow-hidden">
+        <img src="https://i.postimg.cc/MKd7z8Dm/hamza.jpg" 
+             alt="LahoreMart Sale" 
+             class="w-full h-56 md:h-80 object-cover">
+        <!-- Dark overlay for text -->
+        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent flex items-center">
+            <div class="text-white p-6 md:p-12">
+                <h2 class="text-3xl md:text-6xl font-black text-[#F85606] tracking-wide">LAHOREMART</h2>
+                <h3 class="text-2xl md:text-5xl font-black mt-1">BIG SALE</h3>
+                <p class="text-xl md:text-3xl mt-3 font-bold">UP TO <span class="text-[#F85606]">70% OFF</span></p>
+                <p class="text-sm md:text-base mt-2 bg-[#F85606] inline-block px-3 py-1 rounded">Cash on Delivery | Limited Time</p>
+            </div>
+        </div>
     </div>
+</div>
 
-    <!-- 5. ALL PRODUCTS SECTION -->
+    <!-- 5. DEALS SECTION -->
     <div class="container mx-auto px-4 mt-6">
         <div class="bg-white p-4 rounded-lg shadow">
-            <h3 id="section-title" class="text-xl font-bold">Just For You</h3>
-            <div id="product-list" class="grid grid-cols-2 md:grid-cols-6 gap-4 mt-4"></div>
+            <h3 id="section-title" class="text-2xl font-bold border-b-2 border-[#F85606] pb-2">🔥 Hot Deals For You</h3>
+            <div id="product-list" class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4"></div>
         </div>
     </div>
 
     <!-- 6. CART SIDEBAR -->
     <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50 p-4 flex flex-col">
         <div class="flex justify-between items-center border-b pb-2">
-            <h3 class="text-xl font-bold">Shopping Cart</h3>
+            <h3 class="text-xl font-bold">Your Cart</h3>
             <button onclick="toggleCart()" class="text-2xl">&times;</button>
         </div>
         <div id="cart-items" class="mt-4 overflow-y-auto flex-grow"></div>
@@ -71,63 +84,47 @@
             <input id="customer-name" type="text" placeholder="Full Name" class="w-full border p-2 rounded mt-2" required>
             <input id="customer-phone" type="text" placeholder="03XX-XXXXXXX" class="w-full border p-2 rounded mt-2" required>
             <textarea id="customer-address" placeholder="Delivery Address" class="w-full border p-2 rounded mt-2" required></textarea>
-            <button onclick="sendWhatsAppOrder()" class="w-full bg-[#F85606] text-white py-3 rounded-lg mt-3 font-bold">Place Order via WhatsApp</button>
+            <button onclick="sendWhatsAppOrder()" class="w-full bg-[#F85606] text-white py-3 rounded-lg mt-3 font-bold">Order on WhatsApp</button>
         </div>
     </div>
 
-    <!-- 7. PRO FOOTER -->
+    <!-- 7. FOOTER -->
     <footer class="bg-[#2E2E54] text-white mt-12">
         <div class="container mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
-            <div>
-                <h4 class="font-bold mb-2">Customer Care</h4>
-                <a href="#" class="block hover:text-yellow-300">Help Center</a>
-                <a href="https://wa.me/923024623274" class="block hover:text-yellow-300">Contact Us</a>
-            </div>
-            <div>
-                <h4 class="font-bold mb-2">LahoreMart</h4>
-                <a href="#" class="block hover:text-yellow-300">About Us</a>
-                <a href="#" class="block hover:text-yellow-300">Privacy Policy</a>
-            </div>
-            <div>
-                <h4 class="font-bold mb-2">Payment</h4>
-                <p class="block">Cash on Delivery</p>
-                <p class="block">Bank Transfer</p>
-            </div>
-            <div>
-                <h4 class="font-bold mb-2">Follow Us</h4>
-                <a href="https://facebook.com" target="_blank" class="block hover:text-yellow-300">Facebook</a>
-                <a href="https://instagram.com" target="_blank" class="block hover:text-yellow-300">Instagram</a>
-            </div>
+            <div><h4 class="font-bold mb-2">Customer Care</h4><a href="#" class="block hover:text-yellow-300">Help Center</a><a href="https://wa.me/923024623274" class="block hover:text-yellow-300">WhatsApp: 0302-4623274</a></div>
+            <div><h4 class="font-bold mb-2">LahoreMart</h4><a href="#" class="block hover:text-yellow-300">About Us</a><a href="#" class="block hover:text-yellow-300">Privacy Policy</a></div>
+            <div><h4 class="font-bold mb-2">Payment</h4><p>Cash on Delivery</p><p>Bank Transfer</p></div>
+            <div><h4 class="font-bold mb-2">Follow Us</h4><a href="https://facebook.com" target="_blank" class="block hover:text-yellow-300">Facebook</a><a href="https://instagram.com" target="_blank" class="block hover:text-yellow-300">Instagram</a></div>
         </div>
         <div class="text-center py-4 border-t border-gray-600 text-xs">© 2026 LahoreMart. All Rights Reserved.</div>
     </footer>
 
 <script>
-    // AB HAR PRODUCT ME CATEGORY ADD KI HAI
     const products = [
-        {id: 1, name: "Wireless Earbuds Pro", price: 2499, oldPrice: 3999, image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=200", rating: 4.8, sold: 1200, category: "electronics"},
-        {id: 2, name: "Men's Cotton T-Shirt", price: 899, oldPrice: 1499, image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200", rating: 4.5, sold: 5400, category: "fashion"},
-        {id: 3, name: "Smart Watch Series 9", price: 4999, oldPrice: 7999, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200", rating: 4.9, sold: 890, category: "electronics"},
-        {id: 4, name: "Kitchen Set 8-Piece", price: 3200, oldPrice: 5000, image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200", rating: 4.6, sold: 2100, category: "home"},
-        {id: 5, name: "Bluetooth Speaker", price: 3500, oldPrice: 5500, image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=200", rating: 4.7, sold: 3400, category: "electronics"},
-        {id: 6, name: "Ladies Handbag", price: 2200, oldPrice: 3500, image: "https://images.unsplash.com/photo-1591561954557-26941169b49e?w=200", rating: 4.4, sold: 1800, category: "fashion"},
-        {id: 7, name: "iPhone 15 Pro Max Cover", price: 2000, oldPrice: 1550, image: "https://iphonecovers.pk/cdn/shop/files/WhatsAppImage2024-08-25at2.31.35PM.jpg?v=1724581090&width=600", rating: 4.3, sold: 1900, category: "mobiles"},
-        {id: 8, name: "Face Wash", price: 650, oldPrice: 900, image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=200", rating: 4.5, sold: 800, category: "beauty"},
-        {id: 9, name: "Dumbbells 5KG Pair", price: 2500, oldPrice: 3500, image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200", rating: 4.6, sold: 400, category: "sports"},
+        {id: 1, name: "Wireless Earbuds Pro", price: 1999, oldPrice: 3999, image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=300", rating: 4.8, sold: 1200, category: "electronics", discount: "50%"},
+        {id: 2, name: "Men's Premium Cotton T-Shirt", price: 749, oldPrice: 1499, image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300", rating: 4.5, sold: 5400, category: "fashion", discount: "50%"},
+        {id: 3, name: "Smart Watch Series 9", price: 3999, oldPrice: 7999, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300", rating: 4.9, sold: 890, category: "electronics", discount: "50%"},
+        {id: 4, name: "Kitchen Set 8-Piece Non-Stick", price: 2500, oldPrice: 5000, image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300", rating: 4.6, sold: 2100, category: "home", discount: "50%"},
+        {id: 5, name: "Bluetooth Speaker Heavy Bass", price: 2750, oldPrice: 5500, image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=300", rating: 4.7, sold: 3400, category: "electronics", discount: "50%"},
+        {id: 6, name: "Ladies Fancy Handbag", price: 1750, oldPrice: 3500, image: "https://images.unsplash.com/photo-1591561954557-26941169b49e?w=300", rating: 4.4, sold: 1800, category: "fashion", discount: "50%"},
+        {id: 7, name: "iPhone 15 Pro Max Cover", price: 999, oldPrice: 2000, image: "https://iphonecovers.pk/cdn/shop/files/WhatsAppImage2024-08-25at2.31.35PM.jpg?v=1724581090&width=600", rating: 4.3, sold: 1900, category: "mobiles", discount: "50%"},
+        {id: 8, name: "Face Wash For Glowing Skin", price: 450, oldPrice: 900, image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=300", rating: 4.5, sold: 800, category: "beauty", discount: "50%"},
     ];
     let cart = [];
     let currentCategory = 'all';
 
     function createProductCard(p) {
+        let discountPercent = Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100);
         return `
-        <div class="product-card bg-white rounded-md shadow-sm overflow-hidden transition duration-300 cursor-pointer">
-            <img src="${p.image}" class="w-full h-40 object-cover">
-            <div class="p-2">
-                <h4 class="font-medium text-sm h-10 overflow-hidden">${p.name}</h4>
-                <p class="text-lg font-bold text-[#F85606]">Rs. ${p.price}</p>
-                <p class="text-xs line-through text-gray-500">Rs. ${p.oldPrice}</p>
-                <div class="text-yellow-500 text-xs">⭐ ${p.rating} | Sold ${p.sold}</div>
-                <button onclick="addToCart(${p.id})" class="w-full bg-[#F85606] text-white py-1.5 rounded-md mt-2 text-sm font-semibold hover:bg-orange-700">Add to Cart</button>
+        <div class="product-card bg-white rounded-lg shadow-sm overflow-hidden transition duration-300 cursor-pointer relative">
+            <div class="discount-badge">${discountPercent}% OFF</div>
+            <img src="${p.image}" class="w-full h-48 object-cover">
+            <div class="p-3">
+                <h4 class="font-semibold text-sm h-10 overflow-hidden">${p.name}</h4>
+                <p class="text-xl font-bold text-[#F85606] mt-1">Rs. ${p.price}</p>
+                <p class="text-sm line-through text-gray-500">Rs. ${p.oldPrice}</p>
+                <div class="text-yellow-500 text-xs mt-1">⭐ ${p.rating} | ${p.sold} Sold</div>
+                <button onclick="addToCart(${p.id})" class="w-full bg-[#F85606] text-white py-2 rounded-md mt-2 text-sm font-bold hover:bg-orange-700">ADD TO CART</button>
             </div>
         </div>`;
     }
@@ -136,17 +133,11 @@
         document.getElementById('product-list').innerHTML = list.map(p => createProductCard(p)).join('');
     }
 
-    // YE NAYA FUNCTION HAI - CATEGORY FILTER
     function filterCategory(cat) {
         currentCategory = cat;
-        // Active button highlight
         document.querySelectorAll('[id^=cat-]').forEach(el => el.classList.remove('active-cat'));
         document.getElementById(`cat-${cat}`).classList.add('active-cat');
-        
-        // Title change
-        document.getElementById('section-title').innerText = cat === 'all' ? 'Just For You' : cat.charAt(0).toUpperCase() + cat.slice(1);
-
-        // Products filter
+        document.getElementById('section-title').innerText = cat === 'all' ? '🔥 Hot Deals For You' : `🔥 ${cat.charAt(0).toUpperCase() + cat.slice(1)} Deals`;
         let filtered = cat === 'all' ? products : products.filter(p => p.category === cat);
         displayProducts(filtered);
     }
@@ -163,16 +154,14 @@
         document.getElementById('cart-total').innerText = cart.reduce((t,i)=>t+i.price*i.qty,0);
         document.getElementById('cart-items').innerHTML = cart.map(i => `
             <div class="flex gap-2 border-b py-2">
-                <img src="${i.image}" class="w-12 h-12">
-                <div><p class="text-sm">${i.name}</p><p class="text-xs">Qty: ${i.qty} - Rs. ${i.price*i.qty}</p></div>
+                <img src="${i.image}" class="w-12 h-12 rounded">
+                <div><p class="text-sm font-medium">${i.name}</p><p class="text-xs">Qty: ${i.qty} - Rs. ${i.price*i.qty}</p></div>
             </div>`).join('');
     }
     function searchProducts() {
         const val = document.getElementById('search').value.toLowerCase();
         let filtered = products.filter(p => p.name.toLowerCase().includes(val));
-        if(currentCategory !== 'all') {
-            filtered = filtered.filter(p => p.category === currentCategory);
-        }
+        if(currentCategory !== 'all') filtered = filtered.filter(p => p.category === currentCategory);
         displayProducts(filtered);
     }
     function sendWhatsAppOrder() {
@@ -181,17 +170,12 @@
         const address = document.getElementById('customer-address').value;
         if(cart.length === 0) return alert("Cart is empty!");
         if(name === '' || phone === '' || address === '') return alert("Please fill all details!");
-        
         let message = `*New Order - Lahore Mart*%0A%0A`;
         cart.forEach(item => { message += `*${item.name}* - Qty: ${item.qty} - Rs. ${item.price * item.qty}%0A`; });
-        message += `%0A*Total: Rs. ${cart.reduce((t,i)=>t+i.price*i.qty,0)}*%0A%0A`;
-        message += `*Name:* ${name}%0A`;
-        message += `*Phone:* ${phone}%0A`;
-        message += `*Address:* ${address}`;
+        message += `%0A*Total: Rs. ${cart.reduce((t,i)=>t+i.price*i.qty,0)}*%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Address:* ${address}`;
         window.open(`https://wa.me/923024623274?text=${message}`);
     }
     
-    // Start me sab products dikhao
     displayProducts(products);
 </script>
 </body>
