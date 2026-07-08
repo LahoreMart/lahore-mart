@@ -1,129 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lahore Mart - Sab Kuch 1 Jagah</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lahore Mart - Pakistan's #1 Online Shopping</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style> 
+        body { font-family: 'Roboto', sans-serif; } 
+        .product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+        .active-cat { color: #F85606; font-weight: bold; border-bottom: 2px solid #F85606; }
+    </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-[#F5F5F5]">
 
-<!-- Header with Cart -->
-<header class="bg-gradient-to-r from-orange-500 to-red-500 text-white p-4 sticky top-0 z-50">
-  <div class="container mx-auto flex justify-between items-center">
-    <h1 class="text-2xl font-bold">Lahore Mart</h1>
-    <button onclick="toggleCart()" class="relative bg-white text-orange-500 px-4 py-2 rounded-lg font-semibold">
-      🛒 Cart <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-6 h-6">0</span>
-    </button>
-  </div>
-</header>
-
-<!-- Hero -->
-<section class="bg-gradient-to-r from-orange-500 to-red-500 text-white text-center py-12">
-  <h2 class="text-4xl font-bold">Sab Kuch 1 Jagah!</h2>
-  <p>Mobiles, Fashion, Electronics, Ghar ka saman - Sab milega</p>
-</section>
-
-<!-- Products -->
-<div class="container mx-auto p-6">
-  <h3 class="text-2xl font-bold text-center mb-6">Featured Products</h3>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-    
-    <div class="bg-white rounded-lg shadow-md p-4">
-      <img src="https://via.placeholder.com/200" class="w-full h-40 object-cover rounded">
-      <h4 class="font-semibold mt-2">Wireless Headphones</h4>
-      <p class="text-orange-500 font-bold">Rs. 3499</p>
-      <button onclick="addToCart('Wireless Headphones', 3499)" class="w-full bg-orange-500 text-white py-2 rounded mt-2">Add to Cart</button>
-      <a href="https://wa.me/923024623274?text=Order Wireless Headphones" target="_blank" class="w-full block text-center bg-green-500 text-white py-2 rounded mt-2">Order on WhatsApp</a>
+    <!-- 1. TOP BAR -->
+    <div class="bg-[#F85606] text-white text-xs">
+        <div class="container mx-auto px-4 py-1 flex justify-between">
+            <div>Save More on App | Become a Seller</div>
+            <div>Help | Sign Up | Login</div>
+        </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow-md p-4">
-      <img src="https://via.placeholder.com/200" class="w-full h-40 object-cover rounded">
-      <h4 class="font-semibold mt-2">Smart Watch</h4>
-      <p class="text-orange-500 font-bold">Rs. 5999</p>
-      <button onclick="addToCart('Smart Watch', 5999)" class="w-full bg-orange-500 text-white py-2 rounded mt-2">Add to Cart</button>
-      <a href="https://wa.me/923024623274?text=Order Smart Watch" target="_blank" class="w-full block text-center bg-green-500 text-white py-2 rounded mt-2">Order on WhatsApp</a>
+    <!-- 2. MAIN HEADER -->
+    <header class="bg-[#F85606] sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 py-3 flex items-center gap-4">
+            <h1 class="text-2xl font-bold text-white">Lahore<span class="text-yellow-300">Mart</span></h1>
+            <input id="search" onkeyup="searchProducts()" type="text" placeholder="Search in LahoreMart" class="w-full bg-white rounded-md px-4 py-2">
+            <button onclick="toggleCart()" class="relative bg-white text-[#F85606] px-4 py-2 rounded-md font-bold">
+                🛒 <span id="cart-count" class="bg-red-600 text-white text-xs rounded-full px-2 py-0.5 ml-1">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- 3. CATEGORIES BAR - AB YE CLICKABLE HAI -->
+    <div class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-2 flex gap-6 text-sm font-medium overflow-x-auto">
+            <a href="#" onclick="filterCategory('all')" id="cat-all" class="flex items-center gap-1 active-cat">⭐ All</a>
+            <a href="#" onclick="filterCategory('mobiles')" id="cat-mobiles" class="flex items-center gap-1 hover:text-[#F85606]">📱 Mobiles</a>
+            <a href="#" onclick="filterCategory('fashion')" id="cat-fashion" class="flex items-center gap-1 hover:text-[#F85606]">👗 Fashion</a>
+            <a href="#" onclick="filterCategory('electronics')" id="cat-electronics" class="flex items-center gap-1 hover:text-[#F85606]">💻 Electronics</a>
+            <a href="#" onclick="filterCategory('home')" id="cat-home" class="flex items-center gap-1 hover:text-[#F85606]">🏠 Home</a>
+            <a href="#" onclick="filterCategory('beauty')" id="cat-beauty" class="flex items-center gap-1 hover:text-[#F85606]">💄 Beauty</a>
+            <a href="#" onclick="filterCategory('sports')" id="cat-sports" class="flex items-center gap-1 hover:text-[#F85606]">🏋️ Sports</a>
+        </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow-md p-4">
-      <img src="https://via.placeholder.com/200" class="w-full h-40 object-cover rounded">
-      <h4 class="font-semibold mt-2">Men's T-Shirt</h4>
-      <p class="text-orange-500 font-bold">Rs. 1299</p>
-      <button onclick="addToCart('Men\'s T-Shirt', 1299)" class="w-full bg-orange-500 text-white py-2 rounded mt-2">Add to Cart</button>
-      <a href="https://wa.me/923024623274?text=Order Men's T-Shirt" target="_blank" class="w-full block text-center bg-green-500 text-white py-2 rounded mt-2">Order on WhatsApp</a>
+    <!-- 4. BANNER -->
+    <div class="container mx-auto px-4 mt-4">
+        <img src="https://via.placeholder.com/1200x300/F85606/FFFFFF?text=Lahore+Mart+Mega+Sale" class="rounded-lg w-full">
     </div>
 
-    <div class="bg-white rounded-lg shadow-md p-4">
-      <img src="https://via.placeholder.com/200" class="w-full h-40 object-cover rounded">
-      <h4 class="font-semibold mt-2">Kitchen Blender</h4>
-      <p class="text-orange-500 font-bold">Rs. 4500</p>
-      <button onclick="addToCart('Kitchen Blender', 4500)" class="w-full bg-orange-500 text-white py-2 rounded mt-2">Add to Cart</button>
-      <a href="https://wa.me/923024623274?text=Order Kitchen Blender" target="_blank" class="w-full block text-center bg-green-500 text-white py-2 rounded mt-2">Order on WhatsApp</a>
+    <!-- 5. ALL PRODUCTS SECTION -->
+    <div class="container mx-auto px-4 mt-6">
+        <div class="bg-white p-4 rounded-lg shadow">
+            <h3 id="section-title" class="text-xl font-bold">Just For You</h3>
+            <div id="product-list" class="grid grid-cols-2 md:grid-cols-6 gap-4 mt-4"></div>
+        </div>
     </div>
 
-  </div>
-</div>
-
-<!-- Cart Modal -->
-<div id="cart-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-  <div class="bg-white w-11/12 md:w-1/2 p-6 rounded-lg">
-    <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
-    <div id="cart-items"></div>
-    <h3 class="font-bold text-xl mt-4">Total: Rs.<span id="cart-total">0</span></h3>
-    <div class="flex gap-2 mt-4">
-      <button onclick="toggleCheckout()" class="bg-orange-500 text-white px-4 py-2 rounded">Checkout</button>
-      <button onclick="toggleCart()" class="bg-gray-500 text-white px-4 py-2 rounded">Close</button>
+    <!-- 6. CART SIDEBAR -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50 p-4 flex flex-col">
+        <div class="flex justify-between items-center border-b pb-2">
+            <h3 class="text-xl font-bold">Shopping Cart</h3>
+            <button onclick="toggleCart()" class="text-2xl">&times;</button>
+        </div>
+        <div id="cart-items" class="mt-4 overflow-y-auto flex-grow"></div>
+        <div class="border-t pt-4">
+            <p class="text-xl font-bold">Total: Rs. <span id="cart-total">0</span></p>
+            <input id="customer-name" type="text" placeholder="Full Name" class="w-full border p-2 rounded mt-2" required>
+            <input id="customer-phone" type="text" placeholder="03XX-XXXXXXX" class="w-full border p-2 rounded mt-2" required>
+            <textarea id="customer-address" placeholder="Delivery Address" class="w-full border p-2 rounded mt-2" required></textarea>
+            <button onclick="sendWhatsAppOrder()" class="w-full bg-[#F85606] text-white py-3 rounded-lg mt-3 font-bold">Place Order via WhatsApp</button>
+        </div>
     </div>
-  </div>
-</div>
 
-<!-- Checkout Form -->
-<div id="checkout-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-  <form onsubmit="placeOrder(event)" class="bg-white w-11/12 md:w-1/3 p-6 rounded-lg">
-    <h2 class="text-2xl font-bold mb-4">Checkout - COD</h2>
-    <input required id="name" placeholder="Name" class="w-full border p-2 mb-2 rounded">
-    <input required id="phone" placeholder="Phone" class="w-full border p-2 mb-2 rounded">
-    <input required id="address" placeholder="Address" class="w-full border p-2 mb-2 rounded">
-    <input required id="city" placeholder="City" class="w-full border p-2 mb-2 rounded">
-    <button type="submit" class="w-full bg-green-500 text-white py-2 rounded">Place Order</button>
-  </form>
-</div>
+    <!-- 7. PRO FOOTER -->
+    <footer class="bg-[#2E2E54] text-white mt-12">
+        <div class="container mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
+            <div>
+                <h4 class="font-bold mb-2">Customer Care</h4>
+                <a href="#" class="block hover:text-yellow-300">Help Center</a>
+                <a href="https://wa.me/923024623274" class="block hover:text-yellow-300">Contact Us</a>
+            </div>
+            <div>
+                <h4 class="font-bold mb-2">LahoreMart</h4>
+                <a href="#" class="block hover:text-yellow-300">About Us</a>
+                <a href="#" class="block hover:text-yellow-300">Privacy Policy</a>
+            </div>
+            <div>
+                <h4 class="font-bold mb-2">Payment</h4>
+                <p class="block">Cash on Delivery</p>
+                <p class="block">Bank Transfer</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-2">Follow Us</h4>
+                <a href="https://facebook.com" target="_blank" class="block hover:text-yellow-300">Facebook</a>
+                <a href="https://instagram.com" target="_blank" class="block hover:text-yellow-300">Instagram</a>
+            </div>
+        </div>
+        <div class="text-center py-4 border-t border-gray-600 text-xs">© 2026 LahoreMart. All Rights Reserved.</div>
+    </footer>
 
 <script>
-let cart = [];
+    // AB HAR PRODUCT ME CATEGORY ADD KI HAI
+    const products = [
+        {id: 1, name: "Wireless Earbuds Pro", price: 2499, oldPrice: 3999, image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=200", rating: 4.8, sold: 1200, category: "electronics"},
+        {id: 2, name: "Men's Cotton T-Shirt", price: 899, oldPrice: 1499, image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200", rating: 4.5, sold: 5400, category: "fashion"},
+        {id: 3, name: "Smart Watch Series 9", price: 4999, oldPrice: 7999, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200", rating: 4.9, sold: 890, category: "electronics"},
+        {id: 4, name: "Kitchen Set 8-Piece", price: 3200, oldPrice: 5000, image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200", rating: 4.6, sold: 2100, category: "home"},
+        {id: 5, name: "Bluetooth Speaker", price: 3500, oldPrice: 5500, image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=200", rating: 4.7, sold: 3400, category: "electronics"},
+        {id: 6, name: "Ladies Handbag", price: 2200, oldPrice: 3500, image: "https://images.unsplash.com/photo-1591561954557-26941169b49e?w=200", rating: 4.4, sold: 1800, category: "fashion"},
+        {id: 7, name: "iPhone 15 Pro Max Cover", price: 2000, oldPrice: 1550, image: "https://iphonecovers.pk/cdn/shop/files/WhatsAppImage2024-08-25at2.31.35PM.jpg?v=1724581090&width=600", rating: 4.3, sold: 1900, category: "mobiles"},
+        {id: 8, name: "Face Wash", price: 650, oldPrice: 900, image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=200", rating: 4.5, sold: 800, category: "beauty"},
+        {id: 9, name: "Dumbbells 5KG Pair", price: 2500, oldPrice: 3500, image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200", rating: 4.6, sold: 400, category: "sports"},
+    ];
+    let cart = [];
+    let currentCategory = 'all';
 
-function addToCart(name, price){
-  let item = cart.find(i => i.name === name);
-  if(item){ item.qty++ } else { cart.push({name, price, qty: 1}) }
-  updateCart();
-}
+    function createProductCard(p) {
+        return `
+        <div class="product-card bg-white rounded-md shadow-sm overflow-hidden transition duration-300 cursor-pointer">
+            <img src="${p.image}" class="w-full h-40 object-cover">
+            <div class="p-2">
+                <h4 class="font-medium text-sm h-10 overflow-hidden">${p.name}</h4>
+                <p class="text-lg font-bold text-[#F85606]">Rs. ${p.price}</p>
+                <p class="text-xs line-through text-gray-500">Rs. ${p.oldPrice}</p>
+                <div class="text-yellow-500 text-xs">⭐ ${p.rating} | Sold ${p.sold}</div>
+                <button onclick="addToCart(${p.id})" class="w-full bg-[#F85606] text-white py-1.5 rounded-md mt-2 text-sm font-semibold hover:bg-orange-700">Add to Cart</button>
+            </div>
+        </div>`;
+    }
 
-function updateCart(){
-  document.getElementById('cart-count').innerText = cart.reduce((a,b)=>a+b.qty,0);
-  let items = document.getElementById('cart-items');
-  items.innerHTML = '';
-  let total = 0;
-  cart.forEach(i => {
-    total += i.price * i.qty;
-    items.innerHTML += `<div class="flex justify-between py-2 border-b"><span>${i.name} x${i.qty}</span><span>Rs.${i.price*i.qty}</span></div>`;
-  });
-  document.getElementById('cart-total').innerText = total;
-}
+    function displayProducts(list) {
+        document.getElementById('product-list').innerHTML = list.map(p => createProductCard(p)).join('');
+    }
 
-function toggleCart(){ document.getElementById('cart-modal').classList.toggle('hidden') }
-function toggleCheckout(){ document.getElementById('checkout-modal').classList.toggle('hidden') }
+    // YE NAYA FUNCTION HAI - CATEGORY FILTER
+    function filterCategory(cat) {
+        currentCategory = cat;
+        // Active button highlight
+        document.querySelectorAll('[id^=cat-]').forEach(el => el.classList.remove('active-cat'));
+        document.getElementById(`cat-${cat}`).classList.add('active-cat');
+        
+        // Title change
+        document.getElementById('section-title').innerText = cat === 'all' ? 'Just For You' : cat.charAt(0).toUpperCase() + cat.slice(1);
 
-function placeOrder(e){
-  e.preventDefault();
-  let msg = `*New Order - Lahore Mart*\n\n`;
-  cart.forEach(i => msg += `${i.name} x${i.qty} = Rs.${i.price*i.qty}\n`);
-  msg += `\nTotal: Rs.${document.getElementById('cart-total').innerText}\n\n`;
-  msg += `Name: ${name.value}\nPhone: ${phone.value}\nAddress: ${address.value}\nCity: ${city.value}`;
-  window.open(`https://wa.me/923024623274?text=${encodeURIComponent(msg)}`, '_blank');
-  alert('Order WhatsApp pe bhej diya!');
-  cart = []; updateCart(); toggleCart(); toggleCheckout();
-}
+        // Products filter
+        let filtered = cat === 'all' ? products : products.filter(p => p.category === cat);
+        displayProducts(filtered);
+    }
+
+    function addToCart(id) {
+        const product = products.find(p => p.id === id);
+        const item = cart.find(i => i.id === id);
+        if(item) item.qty++; else cart.push({...product, qty: 1});
+        updateCart();
+    }
+    function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('translate-x-full'); }
+    function updateCart() {
+        document.getElementById('cart-count').innerText = cart.reduce((t,i)=>t+i.qty,0);
+        document.getElementById('cart-total').innerText = cart.reduce((t,i)=>t+i.price*i.qty,0);
+        document.getElementById('cart-items').innerHTML = cart.map(i => `
+            <div class="flex gap-2 border-b py-2">
+                <img src="${i.image}" class="w-12 h-12">
+                <div><p class="text-sm">${i.name}</p><p class="text-xs">Qty: ${i.qty} - Rs. ${i.price*i.qty}</p></div>
+            </div>`).join('');
+    }
+    function searchProducts() {
+        const val = document.getElementById('search').value.toLowerCase();
+        let filtered = products.filter(p => p.name.toLowerCase().includes(val));
+        if(currentCategory !== 'all') {
+            filtered = filtered.filter(p => p.category === currentCategory);
+        }
+        displayProducts(filtered);
+    }
+    function sendWhatsAppOrder() {
+        const name = document.getElementById('customer-name').value;
+        const phone = document.getElementById('customer-phone').value;
+        const address = document.getElementById('customer-address').value;
+        if(cart.length === 0) return alert("Cart is empty!");
+        if(name === '' || phone === '' || address === '') return alert("Please fill all details!");
+        
+        let message = `*New Order - Lahore Mart*%0A%0A`;
+        cart.forEach(item => { message += `*${item.name}* - Qty: ${item.qty} - Rs. ${item.price * item.qty}%0A`; });
+        message += `%0A*Total: Rs. ${cart.reduce((t,i)=>t+i.price*i.qty,0)}*%0A%0A`;
+        message += `*Name:* ${name}%0A`;
+        message += `*Phone:* ${phone}%0A`;
+        message += `*Address:* ${address}`;
+        window.open(`https://wa.me/923024623274?text=${message}`);
+    }
+    
+    // Start me sab products dikhao
+    displayProducts(products);
 </script>
-
 </body>
 </html>
